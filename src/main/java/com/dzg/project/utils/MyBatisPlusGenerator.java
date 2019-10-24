@@ -59,6 +59,14 @@ public class MyBatisPlusGenerator {
    */
   public static String codeDetailMapper = MybatisGenPropertyUtil.getProperty("code.detail.mapper");
 
+  /**
+   * 数据库相关
+   */
+  public static String dataSourceUrl = MybatisGenPropertyUtil.getProperty("data.source.url");
+  public static String dataSourceDriver = MybatisGenPropertyUtil.getProperty("data.source.driver");
+  public static String dataSourceUsername = MybatisGenPropertyUtil.getProperty("data.source.username");
+  public static String dataSourcePassword = MybatisGenPropertyUtil.getProperty("data.source.password");
+
 
   /**
    * 主要main方法
@@ -81,10 +89,10 @@ public class MyBatisPlusGenerator {
 
     // 数据源配置
     DataSourceConfig dsc = new DataSourceConfig();
-    dsc.setUrl("jdbc:mysql://192.168.6.4:3316/devops_jira?useUnicode=true&useSSL=false&characterEncoding=utf8");
-    dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-    dsc.setUsername("bocloud");
-    dsc.setPassword("123$abc");
+    dsc.setUrl(dataSourceUrl);
+    dsc.setDriverName(dataSourceDriver);
+    dsc.setUsername(dataSourceUsername);
+    dsc.setPassword(dataSourcePassword);
     mpg.setDataSource(dsc);
 
     // 包配置
