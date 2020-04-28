@@ -1,6 +1,7 @@
 package com.dzg.project.utils;
 
 
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
@@ -60,6 +61,11 @@ public class MyBatisPlusGenerator {
   public static String codeDetailMapper = MybatisGenPropertyUtil.getProperty("code.detail.mapper");
 
   /**
+   * 代码mapper路径
+   */
+  public static String sqlKey = MybatisGenPropertyUtil.getProperty("mysql.detail.key");
+
+  /**
    * 数据库相关
    */
   public static String dataSourceUrl = MybatisGenPropertyUtil.getProperty("data.source.url");
@@ -85,6 +91,12 @@ public class MyBatisPlusGenerator {
     gc.setOpen(false);
     gc.setSwagger2(true);
     gc.setIdType(IdType.AUTO);
+    gc.setOpen(false);
+    gc.setMapperName("%sMapper");
+    gc.setXmlName("%sMapper");
+    gc.setServiceName("%sService");
+    gc.setServiceImplName("%sServiceImpl");
+    gc.setControllerName("%sController");
     mpg.setGlobalConfig(gc);
 
     // 数据源配置
@@ -93,6 +105,7 @@ public class MyBatisPlusGenerator {
     dsc.setDriverName(dataSourceDriver);
     dsc.setUsername(dataSourceUsername);
     dsc.setPassword(dataSourcePassword);
+    dsc.setDbType(DbType.MARIADB);
     mpg.setDataSource(dsc);
 
     // 包配置
@@ -148,6 +161,7 @@ public class MyBatisPlusGenerator {
     strategy.setRestControllerStyle(true);
     strategy.setEntityTableFieldAnnotationEnable(true);
     strategy.setEntitySerialVersionUID(true);
+    strategy.setSuperEntityColumns(sqlKey);
     // 公共父类
     // 写于父类中的公共字段
     strategy.setSuperEntityColumns("id");
